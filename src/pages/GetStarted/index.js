@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import {ILlogo, ILGetStarted} from '../../assets/ilustration';
 import {Button, Gap} from '../../component';
+import {colors, fonts} from '../../utils';
 
 const GetStarted = ({navigation}) => {
   return (
@@ -21,7 +22,7 @@ const GetStarted = ({navigation}) => {
         <Button
           type="secondary"
           title="Sign In"
-          onPress={() => navigation.replace('Login')}
+          onPress={() => navigation.navigate('Login')}
         />
       </View>
     </ImageBackground>
@@ -34,13 +35,13 @@ const styles = StyleSheet.create({
     padding: 40,
     flex: 1,
     justifyContent: 'space-between',
-    color: 'white',
+    backgroundColor: colors.white,
   },
   title: {
     fontSize: 28,
     // fontWeight: '600',
     marginTop: 91,
-    color: 'white',
-    fontFamily: 'Nunito-SemiBold',
+    color: colors.white,
+    fontFamily: fonts.primary[600],
   },
 });

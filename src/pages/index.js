@@ -2,4 +2,18 @@ import Splash from './splash';
 import GetStarted from './GetStarted';
 import Register from './Register';
 import Login from './Login';
-export {Splash, GetStarted, Register, Login};
+import UploadPhoto from './UploadPhoto';
+import Doctors from './Doctors';
+import Hospitals from './Hospitals';
+import Messages from './Messages';
+
+export {
+  Splash,
+  GetStarted,
+  Register,
+  Login,
+  UploadPhoto,
+  Doctors,
+  Hospitals,
+  Messages,
+};

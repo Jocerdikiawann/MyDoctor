@@ -1,12 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ILlogo} from '../../assets';
+import {StyleSheet, View} from 'react-native';
+import {Button, Gap, Header, Input} from '../../component';
+import {colors} from '../../utils';
 
-const Register = () => {
+const Register = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <ILlogo />
-      <Text>Register page</Text>
+      <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
+      <View style={styles.content}>
+        <Input label="Full name" />
+        <Gap height={24} />
+        <Input label="Pekerjaan" />
+        <Gap height={24} />
+        <Input label="Email address" />
+        <Gap height={24} />
+        <Input label="Password" />
+        <Gap height={40} />
+        <Button
+          title="Continue"
+          onPress={() => navigation.navigate('UploadPhoto')}
+        />
+      </View>
     </View>
   );
 };
@@ -15,9 +29,11 @@ export default Register;
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
+    backgroundColor: colors.white,
     flex: 1,
-    justifyContent: 'space-between',
-    color: 'white',
+  },
+  content: {
+    padding: 40,
+    paddingTop: 0,
   },
 });
