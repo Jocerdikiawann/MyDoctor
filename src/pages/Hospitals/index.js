@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {ILBgHospitals} from '../../assets';
+import {Hospitals2, Hospitals1, Hospitals3, ILBgHospitals} from '../../assets';
 import {ListHospitals} from '../../component';
 import {colors, fonts} from '../../utils';
 
@@ -12,9 +12,24 @@ const Hospitals = () => {
         <Text style={styles.desc}>3 Tersedia</Text>
       </ImageBackground>
       <View style={styles.content}>
-        <ListHospitals />
-        <ListHospitals />
-        <ListHospitals />
+        <ListHospitals
+          type="Rumah sakit umum"
+          name="Permata ibu"
+          address="Jln Bhakti Anjay 20"
+          pic={Hospitals1}
+        />
+        <ListHospitals
+          type="Rumah sakit anak"
+          name="Permata anak"
+          address="Jln Bhakti Anjay 20"
+          pic={Hospitals2}
+        />
+        <ListHospitals
+          type="Rumah sakit jiwa"
+          name="Permata jiwa"
+          address="Jln Bhakti Anjay 20"
+          pic={Hospitals3}
+        />
       </View>
     </View>
   );
