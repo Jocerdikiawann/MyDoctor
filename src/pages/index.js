@@ -6,8 +6,15 @@ import UploadPhoto from './UploadPhoto';
 import Doctors from './Doctors';
 import Hospitals from './Hospitals';
 import Messages from './Messages';
+import ChooseDoctors from './ChooseDoctors';
+import Chatting from './Chatting';
+import UserProfile from './UserProfile';
+import UpdateProfile from './UpdateProfile';
+import DoctorProfile from './DoctorProfile';
 
 export {
+  UpdateProfile,
+  Chatting,
   Splash,
   GetStarted,
   Register,
@@ -16,4 +23,7 @@ export {
   Doctors,
   Hospitals,
   Messages,
+  ChooseDoctors,
+  UserProfile,
+  DoctorProfile,
 };

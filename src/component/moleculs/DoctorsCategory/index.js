@@ -1,15 +1,33 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ILCatUmum} from '../../../assets';
+import {StyleSheet, Text,TouchableOpacity} from 'react-native';
+import {ILCatAnak, ILCatObat, ILCatPsikiater, ILCatUmum} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const DoctorsCategory = () => {
+//props atau properti
+const DoctorsCategory = ({category, onPress}) => {
+  const Icon = () =>{
+    if(category==='dokter umum'){
+      return <ILCatUmum style={styles.ilustrasion}/>
+    }
+    if(category==='psikiater'){
+      return <ILCatPsikiater style={styles.ilustrasion}/>
+    }
+    if(category==='dokter obat'){
+      return <ILCatObat style={styles.ilustrasion}/>
+    }
+    if(category==='dokter anak'){
+      return <ILCatAnak style={styles.ilustrasion}/>
+    }
+
+
+    return <ILCatUmum style={styles.ilustrasion}/>
+  }
   return (
-    <View style={styles.container}>
-      <ILCatUmum style={styles.ilustrasion} />
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Icon/>
       <Text style={styles.label}>Saya butuh</Text>
-      <Text style={styles.category}>dokter umum</Text>
-    </View>
+      <Text style={styles.category}>{category}</Text>
+    </TouchableOpacity>
   );
 };
 

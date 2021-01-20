@@ -7,16 +7,17 @@ import {
   DoctorsCategory,
   Gap,
 } from '../../component';
+import {Doctor1, Doctor2, Doctor3, JSONcategoryDoctor} from '../../assets';
 import {colors, fonts} from '../../utils';
 
-const Doctors = () => {
+const Doctors = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.wrapperSection}>
             <Gap height={30} />
-            <HomeProfile />
+            <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
             <Text style={styles.welcome}>
               Mau konsultasi dengan siapa hari ini?
             </Text>
@@ -25,19 +26,43 @@ const Doctors = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.category}>
                 <Gap width={32} />
-                <DoctorsCategory />
-                <DoctorsCategory />
-                <DoctorsCategory />
-                <DoctorsCategory />
+                {
+                  //mapping data dari json
+                  //setiap perulangan tambah key, yang unique
+                  JSONcategoryDoctor.data.map((item) => {
+                    return (
+                      <DoctorsCategory
+                        key={item.id}
+                        category={item.category}
+                        onPress={() => navigation.navigate('ChooseDoctors')}
+                      />
+                    );
+                  })
+                }
                 <Gap width={22} />
               </View>
             </ScrollView>
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <RatedDoctors />
-            <RatedDoctors />
-            <RatedDoctors />
+            <RatedDoctors
+              name="Amanda Manopause"
+              desc="Pediatrician"
+              avatar={Doctor1}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctors
+              name="Alex Nakal"
+              desc="Pediatrician"
+              avatar={Doctor2}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctors
+              name="Cantik Baik"
+              desc="Pediatrician"
+              avatar={Doctor3}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
           <NewsItem />
