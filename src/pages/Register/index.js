@@ -36,6 +36,17 @@ const Register = ({navigation}) => {
       .then((succes) => {
         setLoading(false);
         setForm('reset');
+        // route/tempat disimpan http://firebase.com/users/124jjasdjb/
+        const data = {
+          fullName: form.fullName,
+          profession: form.profession,
+          email: form.email,
+        };
+
+        Fire.database()
+          .ref('users/' + succes.user.uid + '/')
+          .set(data);
+
         console.log('Register Succes:', succes);
       })
       .catch((error) => {
