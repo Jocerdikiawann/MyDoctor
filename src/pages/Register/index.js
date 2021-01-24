@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Button, Gap, Header, Input} from '../../component';
+import {Button, Gap, Header, Input, Loading} from '../../component';
 import {Fire} from '../../config';
 import {colors, useForm} from '../../utils';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 
 const Register = ({navigation}) => {
   //pengumpulan dat menggunakan state, untuk mengubah data gunakan setData / set(namaData)
@@ -20,9 +21,12 @@ const Register = ({navigation}) => {
     password: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const onContinue = () => {
     //navigation.navigate('UploadPhoto')
     console.log(form);
+    setLoading(true);
     Fire.auth()
       .createUserWithEmailAndPassword(form.email, form.password)
       // .then((user) => {
@@ -30,50 +34,62 @@ const Register = ({navigation}) => {
       //   // ...
       // })
       .then((succes) => {
+        setLoading(false);
+        setForm('reset');
         console.log('Register Succes:', succes);
       })
       .catch((error) => {
         // var errorCode = error.code;
         const errorMessage = error.message;
-        console.log('Error register:', errorMessage);
-        // ..
+        setLoading(false);
+        // kalo lupa buka documentasi https://www.npmjs.com/package/react-native-flash-message
+        showMessage({
+          message: errorMessage,
+          type: 'default',
+          backgroundColor: colors.error,
+          color: colors.white,
+        });
+        console.log('error: ', error);
       });
   };
 
   return (
-    <View style={styles.page}>
-      <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
-      <View style={styles.content}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Input
-            label="Full name"
-            value={form.fullName}
-            onChangeText={(value) => setForm('fullName', value)}
-          />
-          <Gap height={24} />
-          <Input
-            label="Pekerjaan"
-            value={form.profession}
-            onChangeText={(value) => setForm('profession', value)}
-          />
-          <Gap height={24} />
-          <Input
-            label="Email address"
-            value={form.email}
-            onChangeText={(value) => setForm('email', value)}
-          />
-          <Gap height={24} />
-          <Input
-            label="Password"
-            value={form.password}
-            onChangeText={(value) => setForm('password', value)}
-            secureTextEntry
-          />
-          <Gap height={40} />
-          <Button title="Continue" onPress={onContinue} />
-        </ScrollView>
+    <>
+      <View style={styles.page}>
+        <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
+        <View style={styles.content}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Input
+              label="Full name"
+              value={form.fullName}
+              onChangeText={(value) => setForm('fullName', value)}
+            />
+            <Gap height={24} />
+            <Input
+              label="Pekerjaan"
+              value={form.profession}
+              onChangeText={(value) => setForm('profession', value)}
+            />
+            <Gap height={24} />
+            <Input
+              label="Email address"
+              value={form.email}
+              onChangeText={(value) => setForm('email', value)}
+            />
+            <Gap height={24} />
+            <Input
+              label="Password"
+              value={form.password}
+              onChangeText={(value) => setForm('password', value)}
+              secureTextEntry
+            />
+            <Gap height={40} />
+            <Button title="Continue" onPress={onContinue} />
+          </ScrollView>
+        </View>
       </View>
-    </View>
+      {loading && <Loading />}
+    </>
   );
 };
 
