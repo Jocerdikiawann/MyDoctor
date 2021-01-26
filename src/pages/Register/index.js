@@ -39,7 +39,7 @@ const Register = ({navigation}) => {
 
         //keynya user valuenya form
         storeData('user', data);
-        navigation.navigate('UploadPhoto');
+        navigation.navigate('UploadPhoto', data);
         console.log('Register Succes:', succes);
       })
       .catch((error) => {

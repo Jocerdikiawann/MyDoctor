@@ -7,7 +7,9 @@ import {colors, fonts} from '../../utils';
 import * as ImagePicker from 'react-native-image-picker';
 import {showMessage} from 'react-native-flash-message';
 
-const UploadPhoto = ({navigation}) => {
+const UploadPhoto = ({navigation, route}) => {
+  //menerima parameter di pages register
+  const {fullName, profession} = route.params;
   const [hasPhoto, setHasPhoto] = useState(false);
   const [photo, setPhoto] = useState(ILNullPhoto);
 
@@ -40,8 +42,8 @@ const UploadPhoto = ({navigation}) => {
             {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
             {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}
           </TouchableOpacity>
-          <Text style={styles.texto}>Jo is Cerdikiawan</Text>
-          <Text style={styles.textox}>Web & Mobile Programmer</Text>
+          <Text style={styles.texto}>{fullName}</Text>
+          <Text style={styles.textox}>{profession}</Text>
         </View>
         <View>
           <Button
