@@ -26,42 +26,42 @@ const Register = ({navigation}) => {
   const onContinue = () => {
     //navigation.navigate('UploadPhoto')
     console.log(form);
-    setLoading(true);
-    Fire.auth()
-      .createUserWithEmailAndPassword(form.email, form.password)
-      // .then((user) => {
-      //   // Signed in
-      //   // ...
-      // })
-      .then((succes) => {
-        setLoading(false);
-        setForm('reset');
-        // route/tempat disimpan http://firebase.com/users/124jjasdjb/
-        const data = {
-          fullName: form.fullName,
-          profession: form.profession,
-          email: form.email,
-        };
+    // setLoading(true);
+    // Fire.auth()
+    //   .createUserWithEmailAndPassword(form.email, form.password)
+    //   // .then((user) => {
+    //   //   // Signed in
+    //   //   // ...
+    //   // })
+    //   .then((succes) => {
+    //     setLoading(false);
+    //     setForm('reset');
+    //     // route/tempat disimpan http://firebase.com/users/124jjasdjb/
+    //     const data = {
+    //       fullName: form.fullName,
+    //       profession: form.profession,
+    //       email: form.email,
+    //     };
 
-        Fire.database()
-          .ref('users/' + succes.user.uid + '/')
-          .set(data);
+    //     Fire.database()
+    //       .ref('users/' + succes.user.uid + '/')
+    //       .set(data);
 
-        console.log('Register Succes:', succes);
-      })
-      .catch((error) => {
-        // var errorCode = error.code;
-        const errorMessage = error.message;
-        setLoading(false);
-        // kalo lupa buka documentasi https://www.npmjs.com/package/react-native-flash-message
-        showMessage({
-          message: errorMessage,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
-        console.log('error: ', error);
-      });
+    //     console.log('Register Succes:', succes);
+    //   })
+    //   .catch((error) => {
+    //     // var errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     setLoading(false);
+    //     // kalo lupa buka documentasi https://www.npmjs.com/package/react-native-flash-message
+    //     showMessage({
+    //       message: errorMessage,
+    //       type: 'default',
+    //       backgroundColor: colors.error,
+    //       color: colors.white,
+    //     });
+    //     console.log('error: ', error);
+    //   });
   };
 
   return (
