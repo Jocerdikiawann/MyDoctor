@@ -1,24 +1,40 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {IconAddPhoto, ILNullPhoto} from '../../assets';
+import {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
 import {Button, Gap, Header, Link} from '../../component';
 import {colors, fonts} from '../../utils';
+import * as ImagePicker from 'react-native-image-picker';
 
 const UploadPhoto = ({navigation}) => {
+  const [hasPhoto, setHasPhoto] = useState(false);
+  const [photo, setPhoto] = useState(ILNullPhoto);
+
+  const getImage = () => {
+    ImagePicker.launchImageLibrary({}, (response) => {
+      console.log('response: ', response);
+      const source = {uri: response.uri};
+      setPhoto(source);
+      setHasPhoto(true);
+    });
+  };
+
   return (
     <View style={styles.page}>
       <Header title="Upload Photo" />
       <View style={styles.content}>
         <View style={styles.profile}>
-          <View style={styles.photoWrapper}>
-            <Image source={ILNullPhoto} style={styles.photo} />
-            <IconAddPhoto style={styles.addPhoto} />
-          </View>
+          <TouchableOpacity style={styles.photoWrapper} onPress={getImage}>
+            <Image source={photo} style={styles.photo} />
+            {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
+            {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}
+          </TouchableOpacity>
           <Text style={styles.texto}>Jo is Cerdikiawan</Text>
           <Text style={styles.textox}>Web & Mobile Programmer</Text>
         </View>
         <View>
           <Button
+            disable={!hasPhoto}
             title="Upload and Continue"
             onPress={() => navigation.replace('MainApp')}
           />
@@ -73,6 +89,7 @@ const styles = StyleSheet.create({
   photo: {
     width: 110,
     height: 110,
+    borderRadius: 110 / 2,
   },
   photoWrapper: {
     width: 130,
