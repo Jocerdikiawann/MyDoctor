@@ -1,18 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeData = async (value) => {
+export const storeData = async (key, value) => {
   try {
-    await AsyncStorage.setItem('@storage_Key', value);
+    //ubah object menjadi string dengan json.stringify
+    await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     // saving error
   }
 };
 
-const getData = async () => {
+export const getData = async (key) => {
   try {
-    const value = await AsyncStorage.getItem('@storage_Key');
+    const value = await AsyncStorage.getItem(key);
     if (value !== null) {
-      // value previously stored
+      //kembalikan dari string ke objek dengan parser
+      return JSON.parse(value);
     }
   } catch (e) {
     // error reading value

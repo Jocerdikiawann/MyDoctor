@@ -2,16 +2,11 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, Input, Loading} from '../../component';
 import {Fire} from '../../config';
-import {colors, useForm} from '../../utils';
+import {colors, getData, storeData, useForm} from '../../utils';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 
 const Register = ({navigation}) => {
   //pengumpulan dat menggunakan state, untuk mengubah data gunakan setData / set(namaData)
-  // const [fullName, setFullName] = useState('');
-  // const [profession, setProfession] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   // value menjadi object
   //custom useState
   const [form, setForm] = useForm({
@@ -24,44 +19,42 @@ const Register = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const onContinue = () => {
-    //navigation.navigate('UploadPhoto')
     console.log(form);
-    // setLoading(true);
-    // Fire.auth()
-    //   .createUserWithEmailAndPassword(form.email, form.password)
-    //   // .then((user) => {
-    //   //   // Signed in
-    //   //   // ...
-    //   // })
-    //   .then((succes) => {
-    //     setLoading(false);
-    //     setForm('reset');
-    //     // route/tempat disimpan http://firebase.com/users/124jjasdjb/
-    //     const data = {
-    //       fullName: form.fullName,
-    //       profession: form.profession,
-    //       email: form.email,
-    //     };
+    setLoading(true);
+    Fire.auth()
+      .createUserWithEmailAndPassword(form.email, form.password)
+      .then((succes) => {
+        setLoading(false);
+        setForm('reset');
+        // route/tempat disimpan http://firebase.com/users/124jjasdjb/
+        const data = {
+          fullName: form.fullName,
+          profession: form.profession,
+          email: form.email,
+        };
 
-    //     Fire.database()
-    //       .ref('users/' + succes.user.uid + '/')
-    //       .set(data);
+        Fire.database()
+          .ref('users/' + succes.user.uid + '/')
+          .set(data);
 
-    //     console.log('Register Succes:', succes);
-    //   })
-    //   .catch((error) => {
-    //     // var errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     setLoading(false);
-    //     // kalo lupa buka documentasi https://www.npmjs.com/package/react-native-flash-message
-    //     showMessage({
-    //       message: errorMessage,
-    //       type: 'default',
-    //       backgroundColor: colors.error,
-    //       color: colors.white,
-    //     });
-    //     console.log('error: ', error);
-    //   });
+        //keynya user valuenya form
+        storeData('user', data);
+        navigation.navigate('UploadPhoto');
+        console.log('Register Succes:', succes);
+      })
+      .catch((error) => {
+        // var errorCode = error.code;
+        const errorMessage = error.message;
+        setLoading(false);
+        // kalo lupa buka documentasi https://www.npmjs.com/package/react-native-flash-message
+        showMessage({
+          message: errorMessage,
+          type: 'default',
+          backgroundColor: colors.error,
+          color: colors.white,
+        });
+        console.log('error: ', error);
+      });
   };
 
   return (
