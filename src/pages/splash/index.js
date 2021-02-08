@@ -1,13 +1,25 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ILlogo} from '../../assets';
+import {Fire} from '../../config';
 import {colors, fonts} from '../../utils';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      //replace menonaktifkan button back
-      navigation.replace('GetStarted');
+      //cek user sedang login atau tidak
+      //session firebase kurang lebih sekitar 1 jam secara default
+      Fire.auth().onAuthStateChanged((user) => {
+        //jika user ada
+        if (user) {
+          //user login
+          console.log('user: ', user);
+          navigation.replace('MainApp');
+        } else {
+          //user logout
+          navigation.replace('GetStarted');
+        }
+      });
     }, 3000);
   }, []);
   return (
