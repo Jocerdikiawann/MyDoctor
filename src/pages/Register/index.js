@@ -23,7 +23,7 @@ const Register = ({navigation}) => {
     setLoading(true);
     Fire.auth()
       .createUserWithEmailAndPassword(form.email, form.password)
-      .then((succes) => {
+      .then((success) => {
         setLoading(false);
         setForm('reset');
         // route/tempat disimpan http://firebase.com/users/124jjasdjb/
@@ -31,16 +31,17 @@ const Register = ({navigation}) => {
           fullName: form.fullName,
           profession: form.profession,
           email: form.email,
+          uid: success.user.uid,
         };
 
         Fire.database()
-          .ref('users/' + succes.user.uid + '/')
+          .ref('users/' + success.user.uid + '/')
           .set(data);
 
         //keynya user valuenya form
         storeData('user', data);
         navigation.navigate('UploadPhoto', data);
-        console.log('Register Succes:', succes);
+        console.log('Register Success:', success);
       })
       .catch((error) => {
         // var errorCode = error.code;

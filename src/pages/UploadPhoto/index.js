@@ -1,35 +1,60 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
 import {Button, Gap, Header, Link} from '../../component';
 import {colors, fonts} from '../../utils';
-import * as ImagePicker from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {showMessage} from 'react-native-flash-message';
+import {Fire} from '../../config';
 
 const UploadPhoto = ({navigation, route}) => {
   //menerima parameter di pages register
-  const {fullName, profession} = route.params;
+  const {fullName, profession, uid} = route.params;
+  // console.log('fullName: ', fullName);
+  // console.log('profession: ', profession);
+  // console.log('email: ', email);
+  const [photoForDB, setPhotoForDB] = useState('');
   const [hasPhoto, setHasPhoto] = useState(false);
   const [photo, setPhoto] = useState(ILNullPhoto);
 
   const getImage = () => {
-    ImagePicker.launchImageLibrary({}, (response) => {
-      console.log('response: ', response);
-      //response didcancel didapat dari response bawaan react native
-      if (response.didCancel || response.error) {
-        showMessage({
-          message: 'Oops, anda tidak memilih foto manapun',
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
-      } else {
-        const source = {uri: response.uri};
-        setPhoto(source);
-        setHasPhoto(true);
-      }
-    });
+    launchImageLibrary(
+      //mengoptimalkan dengan fungsi option dari library image picker
+      //kurangi quality sekitar 50%/0.5 lalu ukuran tinggi dan lebar 200px 
+      {quality: 0.5, maxWidth: 200, maxHeight: 200, includeBase64: true},
+      (response) => {
+        //untuk melihat response dari get image
+        console.log('response: ', response);
+        //response didcancel didapat dari response bawaan react native
+        if (response.didCancel || response.error) {
+          //jika di cancel maka tampilkan pesan ini
+          showMessage({
+            message: 'Oops, anda tidak memilih foto manapun',
+            type: 'default',
+            backgroundColor: colors.error,
+            color: colors.white,
+          });
+          //ketika berhasil upload image tampilkan ini
+        } else {
+          //melihat response apa saja setelah upload
+          console.log('response getImage: ', response); 
+          const source = {uri: response.uri};
+
+          //base 64 itu salah satu image encode, jangan response.data karna ga ada, jadi ganti ke base 64 image encode
+          setPhotoForDB(`data:${response.type};base64, ${response.base64}`);
+          setPhoto(source);
+          setHasPhoto(true);
+        }
+      },
+    );
+  };
+
+  //membuat const baru untuk upload photo setelah berhasil register
+  const uploadAndContinue = () => {
+    Fire.database()
+      .ref('users/' + uid + '/')
+      .update({photo: photoForDB});
+    navigation.replace('MainApp');
   };
 
   return (
@@ -49,7 +74,7 @@ const UploadPhoto = ({navigation, route}) => {
           <Button
             disable={!hasPhoto}
             title="Upload and Continue"
-            onPress={() => navigation.replace('MainApp')}
+            onPress={uploadAndContinue}
           />
           <Gap height={30} />
           <Link
