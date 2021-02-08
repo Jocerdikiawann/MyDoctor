@@ -40,6 +40,7 @@ const Register = ({navigation}) => {
 
         //keynya user valuenya form
         storeData('user', data);
+        //mengirim params ke halaman upload foto
         navigation.navigate('UploadPhoto', data);
         console.log('Register Success:', success);
       })

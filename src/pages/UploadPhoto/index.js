@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
 import {Button, Gap, Header, Link} from '../../component';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, storeData} from '../../utils';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {showMessage} from 'react-native-flash-message';
 import {Fire} from '../../config';
@@ -20,7 +20,7 @@ const UploadPhoto = ({navigation, route}) => {
   const getImage = () => {
     launchImageLibrary(
       //mengoptimalkan dengan fungsi option dari library image picker
-      //kurangi quality sekitar 50%/0.5 lalu ukuran tinggi dan lebar 200px 
+      //kurangi quality sekitar 50%/0.5 lalu ukuran tinggi dan lebar 200px
       {quality: 0.5, maxWidth: 200, maxHeight: 200, includeBase64: true},
       (response) => {
         //untuk melihat response dari get image
@@ -37,7 +37,7 @@ const UploadPhoto = ({navigation, route}) => {
           //ketika berhasil upload image tampilkan ini
         } else {
           //melihat response apa saja setelah upload
-          console.log('response getImage: ', response); 
+          console.log('response getImage: ', response);
           const source = {uri: response.uri};
 
           //base 64 itu salah satu image encode, jangan response.data karna ga ada, jadi ganti ke base 64 image encode
@@ -54,6 +54,12 @@ const UploadPhoto = ({navigation, route}) => {
     Fire.database()
       .ref('users/' + uid + '/')
       .update({photo: photoForDB});
+    //memasukan foto kedalam const data
+    const data = route.params;
+    data.photo = photoForDB;
+    //menyimpan data di atas ke local storage
+    storeData('user', data);
+
     navigation.replace('MainApp');
   };
 
