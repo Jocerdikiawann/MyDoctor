@@ -114,12 +114,14 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     fontFamily: fonts.primary[600],
     textAlign: 'center',
+    textTransform: 'capitalize',
   },
   textox: {
     fontSize: 18,
     color: colors.text.primary,
     fontFamily: fonts.primary.normal,
     textAlign: 'center',
+    textTransform: 'capitalize',
   },
   page: {
     flex: 1,

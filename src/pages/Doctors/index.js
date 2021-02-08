@@ -11,12 +11,6 @@ import {Doctor1, Doctor2, Doctor3, JSONcategoryDoctor} from '../../assets';
 import {colors, fonts, getData} from '../../utils';
 
 const Doctors = ({navigation}) => {
-  useEffect(() => {
-    getData('user').then((res) => {
-      console.log('data user: ', res);
-    });
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.content}>
