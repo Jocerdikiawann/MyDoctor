@@ -104,3 +104,5 @@ Schema database chatting
             -lastChat
             -lastChatDate
             -uidPartner
+
+

@@ -17,6 +17,8 @@ import IconLanguage from './ic_language.svg';
 import IconHelpCenter from './ic_helpCenter.svg';
 import IconRateUs from './ic_rateUs.svg';
 import IconStarKosong from './starKosong.svg';
+import IconMaps from './Maps.svg'
+import IconMapsActive from './MapsActive.svg'
 
 export {
   IconStarKosong,
@@ -38,4 +40,6 @@ export {
   IconMessagesActive,
   IconNext,
   IconBackLight,
+  IconMaps,
+  IconMapsActive,
 };
