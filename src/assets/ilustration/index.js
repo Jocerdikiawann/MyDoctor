@@ -6,6 +6,7 @@ import ILCatObat from './icon_dokter_obat.svg';
 import ILCatPsikiater from './icon_dokter_psikiater.svg';
 import ILCatUmum from './icon_dokter_umum.svg';
 import ILBgHospitals from './bg-hospitals.png';
+import ILBgOxygen from './oxygen.jpg';
 
 export {
   ILlogo,
@@ -16,4 +17,5 @@ export {
   ILCatPsikiater,
   ILCatUmum,
   ILBgHospitals,
+  ILBgOxygen, 
 };

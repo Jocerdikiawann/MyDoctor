@@ -25,7 +25,9 @@ const Hospitals = () => {
       const result = await response.json();
       console.log(`Data siranap : ${result.data}`);
       SetDataHospital(result.data);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const getAllData = (async) => {

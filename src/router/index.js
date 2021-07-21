@@ -1,20 +1,23 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import { BottomNavigator } from '../component';
+import {BottomNavigator} from '../component';
 import {
+  Alkes,
   Chatting,
   ChooseDoctors,
   DoctorProfile,
   Doctors,
   GetStarted,
   Hospitals,
-  Login, Maps, Messages,
+  Login,
+  Maps,
+  Messages,
   Register,
   Splash,
   UpdateProfile,
   UploadPhoto,
-  UserProfile
+  UserProfile,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -26,6 +29,7 @@ const MainApp = () => {
       <Tab.Screen name="Doctors" component={Doctors} />
       <Tab.Screen name="Messages" component={Messages} />
       <Tab.Screen name="Hospitals" component={Hospitals} />
+      <Tab.Screen name="Alkes" component={Alkes} />
       <Tab.Screen name="CoMaps" component={Maps} />
     </Tab.Navigator>
   );
@@ -92,6 +96,11 @@ const Router = () => {
       <Stack.Screen
         name="CoMaps"
         component={Maps}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Alkes"
+        component={Alkes}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

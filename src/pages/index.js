@@ -12,7 +12,7 @@ import UserProfile from './UserProfile';
 import UpdateProfile from './UpdateProfile';
 import DoctorProfile from './DoctorProfile';
 import Maps from './Maps';
-import Testing from './Testing';
+import Alkes from './Alkes';
 
 export {
   UpdateProfile,
@@ -29,5 +29,5 @@ export {
   UserProfile,
   DoctorProfile,
   Maps,
-  Testing
+  Alkes
 };

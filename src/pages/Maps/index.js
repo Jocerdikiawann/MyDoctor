@@ -41,7 +41,7 @@ export default function Maps() {
     setDetail(item);
     setTimeout(() => {
       refRBSheet.current.open();
-    }, 10);
+    }, 1000);
   };
 
   const getMarker = async () => {
@@ -84,8 +84,6 @@ export default function Maps() {
         maxZoomLevel={5}
         region={initialRegion}>
         {data.map((item, index) => {
-          // var parseData = JSON.parse(item.penambahan);
-          // console.log(parseData);
           return (
             <>
               <Marker
@@ -130,7 +128,8 @@ export default function Maps() {
             Sembuh: {currencyFormatter(detail.jumlah_sembuh)}
           </Text>
           <Text style={[styles.countryInfo, styles.existing]}>
-            Penambahan Hari ini : {currencyFormatter(detail.penambahan.positif)}
+            Penambahan Hari ini :{' '}
+            {currencyFormatter(detail?.penambahan?.positif)}
           </Text>
           <Text style={styles.lastUpdate}>
             Terakhir Update: {formatDate(date.last_date)}

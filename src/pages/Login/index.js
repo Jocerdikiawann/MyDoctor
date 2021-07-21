@@ -64,7 +64,7 @@ const Login = ({navigation}) => {
           label="Password"
           value={form.password}
           onChangeText={(value) => setForm('password', value)}
-          secureTextEntry
+          secureTextEntry={true}
         />
         <Gap height={10} />
         <Link title="Forgot my password" size={12} />
