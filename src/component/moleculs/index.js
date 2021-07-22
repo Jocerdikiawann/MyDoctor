@@ -11,6 +11,7 @@ import InputChat from './InputChat';
 import Profile from './Profile';
 import ProfileItems from './ProfileItems';
 import Loading from './Loading';
+import BottomSheet from './BottomSheetModal';
 export {
   Loading,
   Profile,
@@ -25,4 +26,5 @@ export {
   List,
   ListHospitals,
   ProfileItems,
+  BottomSheet
 };

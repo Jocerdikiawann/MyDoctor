@@ -5,6 +5,8 @@ import {
   IconDoctorsActive,
   IconHospitals,
   IconHospitalsActive,
+  IconMaps,
+  IconMapsActive,
   IconMessages,
   IconMessagesActive,
 } from '../../../assets';
@@ -20,6 +22,9 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
     }
     if (title === 'Hospitals') {
       return active ? <IconHospitalsActive /> : <IconHospitals />;
+    }
+    if (title === 'CoMaps') {
+      return active ? <IconMapsActive /> : <IconMaps />;
     }
     return <IconDoctors />;
   };
