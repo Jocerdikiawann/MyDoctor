@@ -51,11 +51,10 @@ const Messages = ({navigation}) => {
         {historyChat.map((chat) => {
           const dataDoctor = {
             id: chat.detailDoctor.uid,
-            data: chat.detailDoctor, // data ini akan di push ke notif
+            data: chat.detailDoctor,
           };
           return (
             <List
-              //ibarat kata key ini adalah primary key, diambil dari yang unique
               key={chat.id}
               profile={{uri: chat.detailDoctor.photo}}
               name={chat.detailDoctor.fullName}

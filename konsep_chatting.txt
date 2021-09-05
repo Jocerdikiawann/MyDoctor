@@ -96,13 +96,14 @@ Schema database chatting
             -lastChatDate
             -uidPartner
 
+
 - Push Notif 
-//tapi jangan gunakan perulangan, ambil stack terakhir berdasarkan uid
-//lalu push ke notif setiap data messages mengalami update
     -uid 
         -chatId --> nurkholid ke dokter alika
             -lastChat
             -lastChatDate
             -uidPartner
 
-
+if(adaPesanBaru){
+    munculkan notifikasi baru
+}
