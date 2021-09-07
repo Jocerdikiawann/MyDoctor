@@ -2,11 +2,29 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {List} from '../../component';
 import {Fire} from '../../config';
-import {colors, fonts, getData} from '../../utils';
+import {colors, fonts, getData, notificationService} from '../../utils';
 
 const Messages = ({navigation}) => {
   const [user, setUser] = useState({});
   const [historyChat, setHistoryChat] = useState([]);
+
+  const [registerToken, setRegisterToken] = useState('');
+  const [fcmRegistered, setFcmRegistered] = useState(false);
+
+  const onRegister = (token) => {
+    setRegisterToken(token.token);
+    setRegisterToken(true);
+  };
+
+  const onNotif = (notif) => {
+    Alert.alert(notif.title, notif.message);
+  };
+
+  const notif = new notificationService(onRegister, onNotif);
+
+  const handlerPerm = (perms) => {
+    Alert.alert('Permissions', JSON.stringify(perms));
+  };
 
   useEffect(() => {
     getDataUserFromLocal();
@@ -15,7 +33,6 @@ const Messages = ({navigation}) => {
     const messagesDB = rootDB.child(urlHistory);
 
     messagesDB.on('value', async (snapshot) => {
-      // console.log('data history : ', snapshot.val());
       if (snapshot.val()) {
         const oldData = snapshot.val();
         const data = [];
@@ -59,7 +76,9 @@ const Messages = ({navigation}) => {
               profile={{uri: chat.detailDoctor.photo}}
               name={chat.detailDoctor.fullName}
               desc={chat.lastContentChat}
-              onPress={() => navigation.navigate('Chatting', dataDoctor)}
+              onPress={() => {
+                navigation.navigate('Chatting', dataDoctor);
+              }}
             />
           );
         })}

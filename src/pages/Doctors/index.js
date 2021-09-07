@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Doctor1, Doctor2, Doctor3} from '../../assets';
 import {
   DoctorsCategory,
   Gap,

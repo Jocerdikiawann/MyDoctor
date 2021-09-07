@@ -24,6 +24,7 @@
     "react-native-gesture-handler": "^1.8.0",
     "react-native-image-picker": "^3.1.4",
     "react-native-maps": "git+https://github.com/xDemon200/react-native-maps.git",
+    "react-native-push-notification": "^8.1.0",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-redash": "^16.0.11",

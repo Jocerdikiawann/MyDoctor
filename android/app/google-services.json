@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "541577105808",
+    "firebase_url": "https://mydoctor-f91ac-default-rtdb.firebaseio.com",
+    "project_id": "mydoctor-f91ac",
+    "storage_bucket": "mydoctor-f91ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541577105808:android:5e86dea6f0369a65646315",
+        "android_client_info": {
+          "package_name": "com.myhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541577105808-1g87vel6np220ovb7ottnfeacc4bubeu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqt_n-P8ljCn8D94gR1_Fa5ZVnM-fFx0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541577105808-1g87vel6np220ovb7ottnfeacc4bubeu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
